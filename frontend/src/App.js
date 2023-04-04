@@ -1,24 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-        day: ""
-    };
-  }
-
+class App extends Component {
+  state = {
+    day: null
+  };
   componentDidMount() {
-      fetch('/api/day')
-          .then(response => response.json())
-          .then(response => this.setState({'day': response.day}))
+    fetch('/api/day')
+      .then(response => response.json())
+      .then(data => this.setState({ day: data }));
   }
-
   render() {
-    return <h1>Hey!  It's {this.state.day}</h1>;
+    const { day } = this.state;
+    return (
+      <div>
+          <p>Today is {day}</p>
+      </div>
+    );
   }
-
 }
 
 export default App;
