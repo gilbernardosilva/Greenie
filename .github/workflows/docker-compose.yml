@@ -32,9 +32,4 @@ jobs:
         push: true
         tags: heyimempty/greenie:frontend
 
-    - name: Deploy Docker Compose
-      uses: docker/compose@v2
-      with:
-        file: docker-compose.yml
-        project-name: myproject
-        command: up -d
+    
