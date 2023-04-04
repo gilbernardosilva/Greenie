@@ -1,38 +1,30 @@
-name: Update Docker Compose
+name: Build and Push Docker Images
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build and push Docker images
+      - name: Build and push frontend image
         uses: docker/build-push-action@v4.0.0
         with:
-          context: .
+          context: ./frontend
           push: true
-          tags: |
-            heyimempty/greenie-frontend:${{ github.sha }}
-            heyimempty/greenie-backend:${{ github.sha }}
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          tags: heyimempty/greenie-frontend::latest
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Build and push backend image
+        uses: docker/build-push-action@v4.0.0
+        with:
+          context: ./backend
+          push: true
+          tags: heyimempty/greenie-backend:latest
 
-      - name: Update Docker Compose
+      - name: Deploy using Docker Compose
         run: docker-compose up -d
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
