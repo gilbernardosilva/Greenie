@@ -17,14 +17,14 @@ jobs:
         with:
           context: ./frontend
           push: true
-          tags: heyimempty/greenie-frontend::latest
+          tags: heyimempty/greenie:frontend
 
       - name: Build and push backend image
         uses: docker/build-push-action@v4.0.0
         with:
           context: ./backend
           push: true
-          tags: heyimempty/greenie-backend:latest
+          tags: heyimempty/greenie:backend
 
       - name: Deploy using Docker Compose
         run: docker-compose up -d
