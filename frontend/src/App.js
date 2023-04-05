@@ -13,7 +13,7 @@ class App extends Component {
     const { day } = this.state;
     return (
       <div>
-          <p>Today is arroz123 {day}</p>
+          <p>Today</p>
       </div>
     );
   }
