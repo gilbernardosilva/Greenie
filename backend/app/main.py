@@ -4,8 +4,8 @@ from datetime import datetime
 app = FastAPI()
 
 @app.get("/day", tags=["Dates"])
-def get_day_of_week():
+def get_day_of_week() -> str:
     """
     Get the current day of week
     """
-    return datetime.now().strftime("%A")
+    return "hello men"
