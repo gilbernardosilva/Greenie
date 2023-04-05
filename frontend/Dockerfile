@@ -2,9 +2,12 @@
 FROM node:lts-alpine as build-step
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
-COPY package.*json  ./
+COPY package.json  ./
+COPY package-lock.json  ./
 RUN npm install
-COPY . .
+COPY ./src ./src
+COPY ./public ./public
+
 RUN npm run build
 
 # Build step #2: build an Caddy container
