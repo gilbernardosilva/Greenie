@@ -1,11 +1,11 @@
 # Build step #1: build the React front end
 FROM node:lts-alpine as build-step
-WORKDIR /app
+WORKDIR /code
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.*json  ./
 RUN npm install
-COPY ./src ./src
-COPY ./public ./public
+COPY . ./code
+
 RUN npm run build
 
 # Build step #2: build an Caddy container
