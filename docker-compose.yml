@@ -14,12 +14,15 @@ services:
 
   frontend:
     build: ./frontend
-    ports:
-      - "8080:80"
     volumes:
+      - type: bind
+        source: ./frontend/src
+        target: /app/src
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy-data:/data
       - caddy-config:/config
+    ports:
+      - "8080:80"
     depends_on:
       - backend
 

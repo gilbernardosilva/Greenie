@@ -8,4 +8,4 @@ def get_day_of_week() -> str:
     """
     Get the current day of week
     """
-    return "hello men"
+    return "asd"
