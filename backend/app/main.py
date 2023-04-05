@@ -6,6 +6,6 @@ app = FastAPI()
 @app.get("/day", tags=["Dates"])
 def get_day_of_week():
     """
-    Get the current day of week
+    Get the current days of week
     """
     return datetime.now().strftime("%A")
