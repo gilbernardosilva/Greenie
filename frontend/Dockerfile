@@ -7,6 +7,8 @@ RUN npm install
 COPY ./src ./src
 COPY ./public ./public
 
+#RUN npm install nodemon --save-dev
+#CMD ["nodemon", "--exec", "npm", "start"]   
 RUN npm run build
 
 # Build step #2: build an Caddy container
