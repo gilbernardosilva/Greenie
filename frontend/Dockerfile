@@ -7,6 +7,7 @@ COPY package-lock.json  ./
 RUN npm install
 COPY ./src ./src
 COPY ./public ./public
+COPY Caddyfile /etc/caddy/Caddyfile
 
 RUN npm run build
 
