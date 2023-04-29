@@ -13,7 +13,7 @@ class App extends Component {
     const { day } = this.state;
     return (
       <div>
-          <p>Today is test api1234235 {day}</p>
+          <p>Today is test auto update test{day}</p>
       </div>
     );
   }
