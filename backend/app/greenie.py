@@ -57,17 +57,12 @@ def load_index(model="gpt-3.5-turbo"):
     return index
 
 
-def chat():
+def chat(question):
     index = load_index()
     # response = index.query("how will hardlevel inform the terminal if it needs to decrease or increase the hours of heating?")
     # print (response)
 
     query_engine = index.as_query_engine()
-    response = query_engine.query("How will hardlevel inform the terminal if it needs to decrease or increase the hours of heating?")
-    print(response)
-    response = query_engine.query("Quantos capacitors sao necessarios para montar o pcb?")
-    print(response)
+    return str(query_engine.query(question))
+
     
-if __name__ == '__main__':
-    # build__index()
-    chat()
