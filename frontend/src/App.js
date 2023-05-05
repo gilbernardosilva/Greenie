@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+import '.App.css'
 
 class App extends Component {
   state = {
     day: null
   };
+    
   componentDidMount() {
     fetch('/api/day')
       .then(response => response.json())
       .then(data => this.setState({ day: data }));
   }
+    
   render() {
     const { day } = this.state;
     return (
