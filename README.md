@@ -1,4 +1,4 @@
-#Greenie
+Greenie
 OpenAI Fine Tuned Model for Carbon-foote
 
 Use Cases:
