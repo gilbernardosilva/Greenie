@@ -1,13 +1,18 @@
 class ActionProvider {
-    
   constructor(createChatBotMessage, setStateFunc) {
     this.createChatBotMessage = createChatBotMessage;
     this.setState = setStateFunc;
   }
-    
-  greet() {
-      const message = this.createChatBotMessage("Hello there");
+
+  async handleQuestion(question) {
+    try {
+      const response = await fetch(`/api/ask/${question}`);
+      const answer = await response.json();
+      const message = this.createChatBotMessage(answer);
       this.addMessageToState(message);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   addMessageToState = (message) => {
@@ -16,7 +21,6 @@ class ActionProvider {
       messages: [...prevState.messages, message],
     }));
   };
-    
 }
 
 export default ActionProvider;
