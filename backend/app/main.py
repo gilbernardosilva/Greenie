@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from datetime import datetime
-from greenie import chat
+from app.greenie import chat
 
 app = FastAPI()
 
