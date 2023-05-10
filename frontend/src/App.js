@@ -1,22 +1,33 @@
-import React, { Component } from 'react';
+import React, { useState } from "react";
+import Chatbot from "react-chatbot-kit";
+import FloatingButton from "./FloatingButton";
+import config from "./chatbot/config";
+import ActionProvider from "./chatbot/ActionProvider";
+import MessageParser from "./chatbot/MessageParser";
 
-class App extends Component {
-  state = {
-    day: null
+
+function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggleChatbot = () => {
+    setIsOpen(!isOpen);
   };
-  componentDidMount() {
-    fetch('/api/day')
-      .then(response => response.json())
-      .then(data => this.setState({ day: data }));
-  }
-  render() {
-    const { day } = this.state;
-    return (
-      <div>
-          <p>Today is test auto update test{day}</p>
-      </div>
-    );
-  }
+
+  return (
+    <div className="App">
+      <FloatingButton isOpen={isOpen} handleClick={handleToggleChatbot} />
+      {isOpen && (
+        <div className="chatbot-container">
+          <Chatbot
+            config={config}
+            actionProvider={ActionProvider}
+            messageParser={MessageParser}
+          />
+        </div>
+      )}
+    </div>
+  );
+    
 }
 
 export default App;
