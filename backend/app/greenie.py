@@ -1,5 +1,6 @@
-from llama_index import SimpleDirectoryReader
+from llama_index import SimpleDirectoryReader, StringIterableReader, Document
 from llama_index.node_parser import SimpleNodeParser
+from llama_index.langchain_helpers.text_splitter import TokenTextSplitter
 
 from llama_index import GPTVectorStoreIndex
 
@@ -39,9 +40,29 @@ def build__index():
     # index = GPTVectorStoreIndex.from_documents(documents, service_context=service_context)
     index = GPTVectorStoreIndex(nodes, service_context=service_context)
     
+    save_index(index)
+    # index.save_to_disk('index-turbo.json')
+
+
+def save_index(index):
     # save index locally
     index.storage_context.persist()
-    # index.save_to_disk('index-turbo.json')
+    
+
+def update_index(dir_name):
+    # load index
+    index = load_index()
+    # transform new files into document chuncks
+    documents = SimpleDirectoryReader(dir_name).load_data()
+    for doc in documents:
+        text_splitter = TokenTextSplitter(separator=" ", chunk_size=2048, chunk_overlap=20)
+        text_chunks = text_splitter.split_text(doc.get_text())
+        doc_chunks = [Document(t) for t in text_chunks]
+        # insert new document chunks into index
+        for doc_chunk in doc_chunks:
+            index.insert(doc_chunk)
+    # save updated index
+    save_index(index)
 
 
 def load_index(model="gpt-3.5-turbo"):
