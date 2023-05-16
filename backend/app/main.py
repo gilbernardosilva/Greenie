@@ -19,7 +19,7 @@ async def get_asnwer(question: str):
     """
     return chat(question)
 
-@app.post("/upload-file/")
+@app.post("/upload-file")
 async def upload_file(file: UploadFile = File(...)):
     # Create a directory to save the uploaded files
     path = 'uploads/'
@@ -27,7 +27,7 @@ async def upload_file(file: UploadFile = File(...)):
     upload_dir.mkdir(parents=True, exist_ok=True)
 
     # Save the file to the upload directory
-    file_path = path + str(file.filename)
+    file_path = f"uploads/{file.filename}"
     content = await file.read()
     with open(file_path, "wb") as f:
         f.write(content)
