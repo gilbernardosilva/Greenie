@@ -1,7 +1,7 @@
 from fastapi import FastAPI, File, UploadFile
 from pathlib import Path
 from datetime import datetime
-from greenie import chat
+from app.greenie import chat
 
 app = FastAPI()
 
