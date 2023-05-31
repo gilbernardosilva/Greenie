@@ -12,6 +12,7 @@ def get_day_of_week():
     """
     return datetime.now().strftime("%A")
 
+
 @app.get("/ask/{question}", tags=["Questions"])
 async def get_asnwer(question: str):
     """
@@ -19,7 +20,8 @@ async def get_asnwer(question: str):
     """
     return chat(question)
 
-@app.post("/upload-file")
+
+@app.post("/upload-file", tags=["Uploads"])
 async def upload_file(file: UploadFile = File(...)):
     # Create a directory to save the uploaded files
     path = 'uploads/'
@@ -33,4 +35,6 @@ async def upload_file(file: UploadFile = File(...)):
         f.write(content)
 
     return {"filename": file.filename}
+
+
 

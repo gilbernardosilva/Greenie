@@ -1,12 +1,18 @@
+let messages= [];
+
 class MessageParser {
     
-  constructor(actionProvider) {
-    this.actionProvider = actionProvider;
-  }
+    constructor(actionProvider, state) {
+        this.actionProvider = actionProvider;
+        this.satete = state;
+    }
 
-  parse(userMessage) {
-    this.actionProvider.handleQuestion(userMessage);
-  }
+    parse(message) {
+        messages.push(message);
+        console.log(message);
+        this.actionProvider.handleQuestion(message);
+    }
     
 }
+
 export default MessageParser;
